@@ -1,0 +1,95 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "singularName": "order",
+    "pluralName": "orders",
+    "displayName": "Order",
+    "description": "Customer orders"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "order_number": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    },
+    "customer_name": {
+      "type": "string",
+      "required": true
+    },
+    "customer_email": {
+      "type": "email",
+      "required": true
+    },
+    "customer_phone": {
+      "type": "string"
+    },
+    "shipping_address": {
+      "type": "json",
+      "required": true
+    },
+    "billing_address": {
+      "type": "json"
+    },
+    "subtotal": {
+      "type": "decimal",
+      "required": true
+    },
+    "tax_amount": {
+      "type": "decimal",
+      "default": 0
+    },
+    "shipping_cost": {
+      "type": "decimal",
+      "required": true
+    },
+    "total_amount": {
+      "type": "decimal",
+      "required": true
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "pending",
+        "confirmed",
+        "processing",
+        "shipped",
+        "delivered",
+        "cancelled"
+      ],
+      "default": "pending"
+    },
+    "payment_status": {
+      "type": "enumeration",
+      "enum": [
+        "pending",
+        "paid",
+        "failed",
+        "refunded"
+      ],
+      "default": "pending"
+    },
+    "payment_method": {
+      "type": "enumeration",
+      "enum": [
+        "card",
+        "transfer",
+        "cash"
+      ],
+      "default": "card"
+    },
+    "notes": {
+      "type": "text"
+    },
+    "order_items": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::order-item.order-item",
+      "mappedBy": "order"
+    }
+  }
+}
