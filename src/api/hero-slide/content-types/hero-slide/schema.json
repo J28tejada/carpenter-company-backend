@@ -20,7 +20,7 @@
     "image": {
       "type": "media",
       "multiple": false,
-      "required": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files"
@@ -42,6 +42,43 @@
       "multiple": false,
       "allowedTypes": [
         "images"
+      ]
+    },
+    "youtube_url": {
+      "type": "string"
+    },
+    "vimeo_url": {
+      "type": "string"
+    },
+    "video_type": {
+      "type": "enumeration",
+      "enum": [
+        "direct",
+        "youtube",
+        "vimeo"
+      ]
+    },
+    "video_autoplay": {
+      "type": "boolean",
+      "default": true
+    },
+    "video_muted": {
+      "type": "boolean",
+      "default": true
+    },
+    "video_controls": {
+      "type": "boolean",
+      "default": false
+    },
+    "video_loop": {
+      "type": "boolean",
+      "default": true
+    },
+    "video": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "videos"
       ]
     }
   }

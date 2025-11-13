@@ -1,0 +1,94 @@
+{
+  "kind": "collectionType",
+  "collectionName": "videos",
+  "info": {
+    "singularName": "video",
+    "pluralName": "videos",
+    "displayName": "video"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "video": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "videos"
+      ]
+    },
+    "youtube_url": {
+      "type": "string"
+    },
+    "vimeo_url": {
+      "type": "string"
+    },
+    "video_type": {
+      "type": "enumeration",
+      "default": "direct",
+      "enum": [
+        "direct",
+        "youtube",
+        "vimeo"
+      ]
+    },
+    "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "autoplay": {
+      "type": "boolean",
+      "default": false
+    },
+    "muted": {
+      "type": "boolean",
+      "default": true
+    },
+    "controls": {
+      "type": "boolean",
+      "default": true
+    },
+    "loop": {
+      "type": "boolean",
+      "default": false
+    },
+    "height": {
+      "type": "enumeration",
+      "default": "medium",
+      "enum": [
+        "small",
+        "medium",
+        "large",
+        "full"
+      ]
+    },
+    "text_position": {
+      "type": "enumeration",
+      "default": "bottom",
+      "enum": [
+        "top",
+        "bottom",
+        "overlay"
+      ]
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    },
+    "sort_order": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

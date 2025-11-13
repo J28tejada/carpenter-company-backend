@@ -512,8 +512,7 @@ export interface ApiHeroSlideHeroSlide extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    image: Schema.Attribute.Media<'images' | 'files'> &
-      Schema.Attribute.Required;
+    image: Schema.Attribute.Media<'images' | 'files'>;
     image_mobile: Schema.Attribute.Media<'images'>;
     is_active: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     link: Schema.Attribute.String;
@@ -530,6 +529,15 @@ export interface ApiHeroSlideHeroSlide extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    video: Schema.Attribute.Media<'videos'>;
+    video_autoplay: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    video_controls: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    video_loop: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    video_muted: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    video_type: Schema.Attribute.Enumeration<['direct', 'youtube', 'vimeo']>;
+    vimeo_url: Schema.Attribute.String;
+    youtube_url: Schema.Attribute.String;
   };
 }
 
@@ -693,6 +701,48 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+  };
+}
+
+export interface ApiVideoVideo extends Struct.CollectionTypeSchema {
+  collectionName: 'videos';
+  info: {
+    displayName: 'video';
+    pluralName: 'videos';
+    singularName: 'video';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    autoplay: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    controls: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    height: Schema.Attribute.Enumeration<['small', 'medium', 'large', 'full']> &
+      Schema.Attribute.DefaultTo<'medium'>;
+    is_active: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::video.video'> &
+      Schema.Attribute.Private;
+    loop: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    muted: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    publishedAt: Schema.Attribute.DateTime;
+    sort_order: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    text_position: Schema.Attribute.Enumeration<['top', 'bottom', 'overlay']> &
+      Schema.Attribute.DefaultTo<'bottom'>;
+    thumbnail: Schema.Attribute.Media<'images'>;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    video: Schema.Attribute.Media<'videos'>;
+    video_type: Schema.Attribute.Enumeration<['direct', 'youtube', 'vimeo']> &
+      Schema.Attribute.DefaultTo<'direct'>;
+    vimeo_url: Schema.Attribute.String;
+    youtube_url: Schema.Attribute.String;
   };
 }
 
@@ -1212,6 +1262,7 @@ declare module '@strapi/strapi' {
       'api::order-item.order-item': ApiOrderItemOrderItem;
       'api::order.order': ApiOrderOrder;
       'api::product.product': ApiProductProduct;
+      'api::video.video': ApiVideoVideo;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
